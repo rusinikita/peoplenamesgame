@@ -1,5 +1,5 @@
 class TextVariantsExercise extends Exercise<TextVariantsData, String> {
-  TextVariantsExercise(TextVariantsData data, String answer, Rightness rightness) : super(data, answer, rightness);
+  const TextVariantsExercise({TextVariantsData data, String answer, Rightness rightness}) : super(data, answer, rightness);
 }
 
 class Exercise<Data, Answer> {
@@ -7,7 +7,7 @@ class Exercise<Data, Answer> {
   final Answer answer;
   final Rightness rightness;
 
-  Exercise(this.data, this.answer, this.rightness);
+  const Exercise(this.data, this.answer, this.rightness);
 }
 
 enum Rightness { Right, Wrong, Partly }
@@ -17,5 +17,5 @@ class TextVariantsData {
   final String photoLink;
   final List<String> variants;
 
-  TextVariantsData(this.question, this.photoLink, this.variants);
+  const TextVariantsData({this.question, this.photoLink, this.variants});
 }
