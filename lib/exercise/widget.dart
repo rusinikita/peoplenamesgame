@@ -7,39 +7,66 @@ class TextVariantsExerciseWidget extends StatefulWidget {
   const TextVariantsExerciseWidget({Key key, this.exercise}) : super(key: key);
 
   @override
-  _TextVariantsExerciseState createState() =>
-      _TextVariantsExerciseState(exercise);
+  _TextVariantsExerciseState createState() => _TextVariantsExerciseState();
 }
 
 class _TextVariantsExerciseState extends State<TextVariantsExerciseWidget> {
-  TextVariantsExercise _exercise;
   String _userAnswer;
-
-  _TextVariantsExerciseState(TextVariantsExercise exercise) {
-    _exercise = exercise;
-  }
 
   @override
   Widget build(BuildContext context) {
-    final variants = _exercise.data.variants
-        .map((variant) => Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                variant,
-              ),
-            ))
+    final theme = Theme.of(context);
+    final exercise = widget.exercise;
+
+    List<Widget> variants = exercise.data.variants
+        .map((variant) => _buildAnswerVariandWidget(variant, context))
         .toList();
 
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text('Question'),
       ),
       body: Column(
-        children: variants,
-        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Image.network(
+            exercise.data.photoLink,
+            height: 250,
+          ),
+          Container(
+            padding: EdgeInsets.all(16),
+            child: Text(
+              exercise.data.question,
+              style: theme.textTheme.headline,
+            ),
+          ),
+          Expanded(
+            child: Column(
+              children: variants,
+              mainAxisAlignment: MainAxisAlignment.end,
+            ),
+          ),
+          RaisedButton(
+            onPressed: () => null,
+            color: theme.primaryColor,
+            textTheme: ButtonTextTheme.primary,
+            child: Text(
+              'Next',
+            ),
+          )
+        ],
       ),
     );
   }
 }
+
+Widget _buildAnswerVariandWidget(String text, BuildContext context) => InkWell(
+      onTap: () => null,
+      child: Container(
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.all(16.0),
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.headline,
+        ),
+      ),
+    );
