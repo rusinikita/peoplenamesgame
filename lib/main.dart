@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:peoplenames/exercise/moks.dart';
-import 'package:peoplenames/exercise/text_variants_widget.dart';
+import 'package:peoplenames/games/people_names_flow.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,8 +21,6 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: TextVariantsExerciseWidget(
-          exercise: mockExercise,
-        ));
+        home: PeopleNamesFlow());
   }
 }
