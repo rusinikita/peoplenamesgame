@@ -9,6 +9,12 @@ class Exercise<Data, Answer> {
   final Rightness rightness;
 
   const Exercise(this.data, this.rightAnswer, this.userAnswer, this.rightness);
+
+  Exercise copyWith({Answer userAnswer, Rightness rightness}) {
+    return Exercise(
+      data, rightAnswer, userAnswer, rightness
+    );
+  }
 }
 
 enum Rightness { Right, Wrong, Partly }

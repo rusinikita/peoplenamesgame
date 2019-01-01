@@ -14,7 +14,28 @@ class _PeopleFlowState extends State<PeopleFlow> {
   Exercise current;
   Queue<Exercise> exercises;
 
-  void _next() {}
+  void handleAnswer(dynamic answer) {
+    setState(() {
+      final rightness =
+          answer == current.rightAnswer ? Rightness.Right : Rightness.Wrong;
+
+      current = TextVariantsExercise(
+          data: current.data,
+          rightAnswer: current.rightAnswer,
+          userAnswer: answer,
+          rightness: rightness);
+    });
+  }
+
+  void next() {
+    setState(() {
+      current = exercises.removeFirst();
+
+      if (exercises.length == 0) {
+        exercises.addAll(mockList);
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -26,16 +47,14 @@ class _PeopleFlowState extends State<PeopleFlow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Question'),
-      ),
       body: Column(
         children: [
           Expanded(
             child: buildExercise(),
           ),
           RaisedButton(
-            onPressed: null,
+            onPressed: current.rightness != null ? next : null,
+            color: Theme.of(context).primaryColor,
             textTheme: ButtonTextTheme.primary,
             child: Text(
               'Next',
@@ -58,9 +77,8 @@ class _PeopleFlowState extends State<PeopleFlow> {
 
   Widget buildTextVariantsExercise(TextVariantsExercise exercise) {
     return TextVariantsExerciseWidget(
-      key: Key(exercise.toString()),
       exercise: exercise,
-      onExerciseAnswered: (answer) => {},
+      onExerciseAnswered: handleAnswer,
     );
   }
 }
