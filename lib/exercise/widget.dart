@@ -3,8 +3,11 @@ import 'package:peoplenames/exercise/entities.dart';
 
 class TextVariantsExerciseWidget extends StatefulWidget {
   final TextVariantsExercise exercise;
+  final void Function(Rightness) onExerciseFinished;
 
-  const TextVariantsExerciseWidget({Key key, this.exercise}) : super(key: key);
+  const TextVariantsExerciseWidget(
+      {Key key, this.exercise, this.onExerciseFinished})
+      : super(key: key);
 
   @override
   _TextVariantsExerciseState createState() => _TextVariantsExerciseState();
@@ -12,6 +15,21 @@ class TextVariantsExerciseWidget extends StatefulWidget {
 
 class _TextVariantsExerciseState extends State<TextVariantsExerciseWidget> {
   String _userAnswer;
+  Rightness _rightness;
+
+  void _onAnswerClick(String answer) {
+    setState(() {
+      _userAnswer = answer;
+      _rightness = Rightness.Right;
+    });
+  }
+
+  void _onNextClick() {
+    setState(() {
+      _userAnswer = null;
+      _rightness = null;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +37,7 @@ class _TextVariantsExerciseState extends State<TextVariantsExerciseWidget> {
     final exercise = widget.exercise;
 
     List<Widget> variants = exercise.data.variants
-        .map((variant) => _buildAnswerVariandWidget(variant, context))
+        .map((variant) => _buildAnswerVariandWidget(variant))
         .toList();
 
     return Scaffold(
@@ -46,7 +64,7 @@ class _TextVariantsExerciseState extends State<TextVariantsExerciseWidget> {
             ),
           ),
           RaisedButton(
-            onPressed: () => null,
+            onPressed: _rightness == null ? null : _onNextClick,
             color: theme.primaryColor,
             textTheme: ButtonTextTheme.primary,
             child: Text(
@@ -57,16 +75,27 @@ class _TextVariantsExerciseState extends State<TextVariantsExerciseWidget> {
       ),
     );
   }
-}
 
-Widget _buildAnswerVariandWidget(String text, BuildContext context) => InkWell(
-      onTap: () => null,
+  Widget _buildAnswerVariandWidget(String text) {
+    final theme = Theme.of(context);
+    final exercise = widget.exercise;
+    final rightnessColor = text == exercise.rightAnswer
+        ? Color.fromARGB(255, 0, 255, 0)
+        : Color.fromARGB(255, 255, 0, 0);
+    final shouldColorRow = _userAnswer != null && (_userAnswer == text || text == exercise.rightAnswer);
+    final decoration =  shouldColorRow ? BoxDecoration(color: rightnessColor) : null;
+
+    return InkWell(
+      onTap: _rightness == null ? () => _onAnswerClick(text) : null,
       child: Container(
         alignment: Alignment.centerLeft,
         padding: EdgeInsets.all(16.0),
         child: Text(
           text,
-          style: Theme.of(context).textTheme.headline,
+          style: theme.textTheme.headline,
         ),
+        decoration: decoration,
       ),
     );
+  }
+}

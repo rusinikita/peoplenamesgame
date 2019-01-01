@@ -7,6 +7,6 @@ const mockExercise = TextVariantsExercise(
         'https://sweetytextmessages.com/wp-content/uploads/2018/01/30-Laughing-Kitty-Meme.jpg',
     variants: ['На рынке', 'В бразилии', 'В африке', 'Иди в жопу'],
   ),
-  answer: 'На рынке',
+  rightAnswer: 'На рынке',
   rightness: null,
 );
