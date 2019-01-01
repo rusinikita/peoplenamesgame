@@ -25,6 +25,28 @@ class _PeopleFlowState extends State<PeopleFlow> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Question'),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: buildExercise(),
+          ),
+          RaisedButton(
+            onPressed: null,
+            textTheme: ButtonTextTheme.primary,
+            child: Text(
+              'Next',
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildExercise() {
     switch (current.runtimeType) {
       case TextVariantsExercise:
         return buildTextVariantsExercise(current);
@@ -38,6 +60,7 @@ class _PeopleFlowState extends State<PeopleFlow> {
     return TextVariantsExerciseWidget(
       key: Key(exercise.toString()),
       exercise: exercise,
+      onExerciseAnswered: (answer) => {},
     );
   }
 }
