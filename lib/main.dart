@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peoplenames/exercise/moks.dart';
-import 'package:peoplenames/exercise/widget.dart';
+import 'package:peoplenames/exercise/text_variants_widget.dart';
 
 void main() => runApp(MyApp());
 
