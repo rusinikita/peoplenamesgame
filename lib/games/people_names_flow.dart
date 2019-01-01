@@ -5,12 +5,12 @@ import 'package:peoplenames/exercise/entities.dart';
 import 'package:peoplenames/exercise/moks.dart';
 import 'package:peoplenames/exercise/text_variants_widget.dart';
 
-class PeopleNamesFlow extends StatefulWidget {
+class PeopleFlow extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _PeopleNamesFlowState();
+  State<StatefulWidget> createState() => _PeopleFlowState();
 }
 
-class _PeopleNamesFlowState extends State<PeopleNamesFlow> {
+class _PeopleFlowState extends State<PeopleFlow> {
   Exercise current;
   Queue<Exercise> exercises;
 
