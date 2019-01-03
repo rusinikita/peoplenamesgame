@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "photoLink": "https://sweetytextmessages.com/wp-content/uploads/2018/01/30-Laughing-Kitty-Meme.jpg",
+        "firstName": "Павел",
+        "lastName": "Булич",
+        "middleName": "",
+        "profession": "QA",
+        "gender": "male"
+    },
+    {
+        "id": 2,
+        "photoLink": "https://i.ytimg.com/vi/vQFiRqUcaf8/hqdefault.jpg",
+        "firstName": "Илья",
+        "lastName": "Некрасов",
+        "middleName": "",
+        "profession": "Android developer",
+        "gender": "helicopter"
+    },
+    {
+        "id": 3,
+        "photoLink": "https://i.ytimg.com/vi/fNodQpGVVyg/hqdefault.jpg",
+        "firstName": "Мария",
+        "lastName": "Круглова",
+        "middleName": "",
+        "profession": "Хороший человек",
+        "gender": "female"
+    }
+]
