@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:peoplenames/people/entities.dart';
 
-Future<List<Person>> getPeoples() async {
+Future<List<Person>> getPeople() async {
   final String json = await rootBundle.loadString('assets/mock_people.json');
   return parsePeople(json);
 }

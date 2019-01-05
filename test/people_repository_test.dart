@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:peoplenames/games/people_exercises_generator.dart';
 import 'package:peoplenames/people/people_repository.dart';
 
 const data =
@@ -8,10 +9,21 @@ void main() {
   group('parsing', () {
     test('should parse', () {
       final parsed = parsePeople(data);
+      print(parsed);
 
       expect(parsed.length, 2);
       expect(parsed[0].id, 1);
       expect(parsed[1].id, 2);
     });
   });
+  group('generator', () {
+    test('should generate', () {
+      final parsed = parsePeople(data);
+      final exercises = generateExercises(parsed + parsed);
+      print(exercises);
+
+      expect(exercises.length, 4);
+    });
+  });
+
 }

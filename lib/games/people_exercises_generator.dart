@@ -8,8 +8,8 @@ List<Exercise> generateExercises(List<Person> people) {
     allNames.shuffle();
 
     final personName = _getPersonFullName(person);
-    final variants = allNames.sublist(0, 3);
-    if (variants.contains(personName)) {
+    final variants = allNames.sublist(0, 4);
+    if (!variants.contains(personName)) {
       variants.removeLast();
       variants.add(personName);
       variants.shuffle();
@@ -23,7 +23,7 @@ List<Exercise> generateExercises(List<Person> people) {
       ),
       rightAnswer: personName,
     );
-  });
+  }).toList();
 }
 
 String _getPersonFullName(Person person) =>

@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:peoplenames/exercise/entities.dart';
 import 'package:peoplenames/exercise/moks.dart';
 import 'package:peoplenames/exercise/text_variants_widget.dart';
+import 'package:peoplenames/games/people_exercises_generator.dart';
+import 'package:peoplenames/people/people_repository.dart';
 
 class PeopleFlow extends StatefulWidget {
   @override
@@ -12,7 +15,9 @@ class PeopleFlow extends StatefulWidget {
 
 class _PeopleFlowState extends State<PeopleFlow> {
   Exercise current;
-  Queue<Exercise> exercises;
+  bool isLoading = false;
+  Error error;
+  final Queue<Exercise> exercises = Queue();
 
   void handleAnswer(dynamic answer) {
     setState(() {
@@ -31,23 +36,56 @@ class _PeopleFlowState extends State<PeopleFlow> {
     setState(() {
       current = exercises.removeFirst();
 
-      if (exercises.length == 0) {
-        exercises.addAll(mockList);
+      if (exercises.length < 3) {
+        loadExercises();
       }
     });
   }
 
   @override
   void initState() {
-    exercises = Queue.of(mockList);
-    current = exercises.removeFirst();
     super.initState();
+
+    loadExercises(isInitial: true).then((_) {});
+  }
+
+  Future loadExercises({bool isInitial = false}) async {
+    try {
+      setState(() {
+        isLoading = true;
+        error = null;
+      });
+      final generated = await getExercisesFromPeople();
+      setState(() {
+        exercises.addAll(generated);
+        isLoading = false;
+        if (isInitial) {
+          current = exercises.removeFirst();
+        }
+      });
+    } catch (e) {
+      print(e);
+      setState(() {
+        isLoading = false;
+        error = e;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: buildBody(),
+    );
+  }
+
+  Widget buildBody() {
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    } else if (error != null) {
+      return Center(child: Text('Error'));
+    } else {
+      return Column(
         children: [
           Expanded(
             child: buildExercise(),
@@ -61,8 +99,8 @@ class _PeopleFlowState extends State<PeopleFlow> {
             ),
           )
         ],
-      ),
-    );
+      );
+    }
   }
 
   Widget buildExercise() {
@@ -81,4 +119,9 @@ class _PeopleFlowState extends State<PeopleFlow> {
       onExerciseAnswered: handleAnswer,
     );
   }
+}
+
+Future<List<Exercise>> getExercisesFromPeople() async {
+  final people = await getPeople();
+  return generateExercises(people);
 }

@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "photoLink": "https://sweetytextmessages.com/wp-content/uploads/2018/01/30-Laughing-Kitty-Meme.jpg",
+        "photoLink": "https://pp.userapi.com/c840530/v840530511/68af5/el-tLKjNcuU.jpg",
         "firstName": "Павел",
         "lastName": "Булич",
         "middleName": "",
@@ -10,20 +10,29 @@
     },
     {
         "id": 2,
-        "photoLink": "https://i.ytimg.com/vi/vQFiRqUcaf8/hqdefault.jpg",
+        "photoLink": "https://pp.userapi.com/c834404/v834404539/f9495/SuknNnu9_AM.jpg",
         "firstName": "Илья",
         "lastName": "Некрасов",
         "middleName": "",
         "profession": "Android developer",
-        "gender": "helicopter"
+        "gender": "male"
     },
     {
         "id": 3,
-        "photoLink": "https://i.ytimg.com/vi/fNodQpGVVyg/hqdefault.jpg",
+        "photoLink": "https://pp.userapi.com/c830209/v830209504/87371/Tk8ehveV_yA.jpg",
         "firstName": "Мария",
         "lastName": "Круглова",
         "middleName": "",
         "profession": "Хороший человек",
         "gender": "female"
+    },
+    {
+        "id": 4,
+        "photoLink": "https://pp.userapi.com/c841325/v841325472/209d8/9QO7YMC_cIg.jpg",
+        "firstName": "Никита",
+        "lastName": "Русин",
+        "middleName": "",
+        "profession": "Создатель",
+        "gender": "helicopter"
     }
 ]
